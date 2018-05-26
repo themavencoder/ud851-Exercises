@@ -17,6 +17,7 @@ package com.example.android.asynctaskloader;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,8 +34,9 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity {
 
     // TODO (1) Create a static final key to store the query's URL
-
+    private static final String QUERY_URL = "queryurl";
     // TODO (2) Create a static final key to store the search's raw JSON
+    private static final String SEARCH_RAW_JSON = "jsoncontent";
 
     private EditText mSearchBoxEditText;
 
@@ -60,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
         mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
 
         // TODO (9) If the savedInstanceState bundle is not null, set the text of the URL and search results TextView respectively
+        if( savedInstanceState != null) {
+            String textViewUrlContent = savedInstanceState.getString(QUERY_URL);
+            String textViewJsonContent = savedInstanceState.getString(SEARCH_RAW_JSON);
+
+            mUrlDisplayTextView.setText(textViewUrlContent);
+            mSearchResultsTextView.setText(textViewJsonContent);
+        }
     }
 
     /**
@@ -152,6 +161,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // TODO (3) Override onSaveInstanceState to persist data across Activity recreation
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        String textViewUrlContent = mUrlDisplayTextView.getText().toString();
+        outState.putString(QUERY_URL,textViewUrlContent);
+
+        String textViewjsonContent = mSearchResultsTextView.getText().toString();
+        outState.putString(SEARCH_RAW_JSON,textViewjsonContent);
+    }
+
     // Do the following steps within onSaveInstanceState
     // TODO (4) Make sure super.onSaveInstanceState is called before doing anything else
 
