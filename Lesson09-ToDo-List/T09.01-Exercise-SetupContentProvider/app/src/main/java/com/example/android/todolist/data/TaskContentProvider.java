@@ -1,18 +1,18 @@
 /*
-* Copyright (C) 2016 The Android Open Source Project
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*      http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright (C) 2016 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.example.android.todolist.data;
 
@@ -25,6 +25,8 @@ import android.support.annotation.NonNull;
 // TODO (1) Verify that TaskContentProvider extends from ContentProvider and implements required methods
 public class TaskContentProvider extends ContentProvider {
 
+    private TaskDbHelper mTaskDbHelper;
+
 
     /* onCreate() is where you should initialize anything you’ll need to setup
     your underlying data source.
@@ -34,9 +36,11 @@ public class TaskContentProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         // TODO (2) Complete onCreate() and initialize a TaskDbhelper on startup
+        mTaskDbHelper = new TaskDbHelper(getContext());
+        return true;
         // [Hint] Declare the DbHelper as a global variable
 
-        return false;
+
     }
 
 
