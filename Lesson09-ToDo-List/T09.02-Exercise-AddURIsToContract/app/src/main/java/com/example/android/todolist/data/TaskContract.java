@@ -16,6 +16,8 @@
 
 package com.example.android.todolist.data;
 
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 
@@ -30,9 +32,18 @@ public class TaskContract {
         4) Content URI for data in the TaskEntry class
       */
 
+    public static final String CONTENT_AUTHROTIY = "com.example.android.todolist";
+
+    public static final Uri BASE_CONTENT_URI  = Uri.parse("content:// " + CONTENT_AUTHROTIY);
+
+    public static final String PATH_TASKS_DIRECTORY = "tasks directory";
+
+
 
     /* TaskEntry is an inner class that defines the contents of the task table */
     public static final class TaskEntry implements BaseColumns {
+
+        public static final Uri CONTENT_URI =BASE_CONTENT_URI.buildUpon().appendPath(PATH_TASKS_DIRECTORY).build();
 
 
         // Task table and column names
